@@ -1,5 +1,7 @@
 import { Octokit } from "octokit";
 import { useState } from "react";
+import UserInterface from "./types/UserInterface";
+import RepoInterface from "./types/RepoInterface";
 
 function App() {
   const octokit = new Octokit({
@@ -7,17 +9,17 @@ function App() {
   });
 
   const [query, setQuery] = useState("");
-  const [users, setUsers] = useState([]);
-  const [repos, setRepos] = useState([]);
+  const [users, setUsers] = useState<UserInterface[]>([]);
+  const [repos, setRepos] = useState<RepoInterface[]>([]);
   const [loadingUsers, setLoadingUsers] = useState(false);
   const [loadingRepos, setLoadingRepos] = useState(false);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.FormEvent<HTMLInputElement>): void => {
     setUsers([]);
-    setQuery(e.target.value);
+    setQuery(e.currentTarget.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setLoadingUsers(true);
     setUsers([]);
@@ -34,7 +36,7 @@ function App() {
     setLoadingUsers(false);
   };
 
-  const getRepo = async (username) => {
+  const getRepo = async (username: string) => {
     setLoadingRepos(true);
     setRepos([]);
 
