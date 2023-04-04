@@ -13,6 +13,7 @@ function App() {
   const [loadingRepos, setLoadingRepos] = useState(false);
 
   const handleInputChange = (e) => {
+    setUsers([]);
     setQuery(e.target.value);
   };
 
@@ -26,6 +27,7 @@ function App() {
         "X-GitHub-Api-Version": "2022-11-28",
       },
       q: query,
+      per_page: 5,
     });
 
     setUsers(result.data.items);
@@ -80,11 +82,11 @@ function App() {
   const userList = users.map((user) => {
     return (
       <div
+        tabIndex={0}
         className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box my-3"
         key={user.id}
         onClick={() => getRepo(user.login)}
       >
-        <input type="checkbox" />
         <div className="collapse-title text-xl font-medium">{user.login}</div>
         <div className="collapse-content">
           <div>
@@ -120,7 +122,7 @@ function App() {
   });
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto p-4">
       <form onSubmit={handleSubmit}>
         <div className="form-control w-full">
           <label className="label">
@@ -139,7 +141,12 @@ function App() {
         </button>
       </form>
 
-      <div className="mt-3">{userList}</div>
+      <div className="mt-3">
+        <p className="text-slate-400">
+          {userList.length > 0 && `Showing users for "${query}"`}
+        </p>
+        {userList}
+      </div>
     </div>
   );
 }
