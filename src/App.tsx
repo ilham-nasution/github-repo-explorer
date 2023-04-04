@@ -1,20 +1,17 @@
-import { useState } from "react";
-
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div>
-      <h1 className="text-green-300">Vite + React</h1>
-      <div>
-        <button className="btn" onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+    <div className="container mx-auto flex justify-center items-center flex-col">
+      <div className="form-control w-full">
+        <label className="label">
+          <span className="label-text">Username</span>
+        </label>
+        <input
+          type="text"
+          placeholder="Enter username"
+          className="input input-bordered w-full"
+        />
       </div>
-      <p>Click on the Vite and React logos to learn more</p>
+      <button className="btn btn-block mt-5">Search</button>
     </div>
   );
 }
