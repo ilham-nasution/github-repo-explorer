@@ -24,7 +24,7 @@ export default interface Repo {
   git_refs_url: string;
   trees_url: string;
   statuses_url: string;
-  languages_url: string;
+  languages_url?: string;
   stargazers_url: string;
   contributors_url: string;
   subscribers_url: string;
@@ -45,51 +45,53 @@ export default interface Repo {
   labels_url: string;
   releases_url: string;
   deployments_url: string;
-  created_at: string | null | undefined;
-  updated_at: Date;
-  pushed_at: Date;
-  git_url: string;
-  ssh_url: string;
-  clone_url: string;
-  svn_url: string;
-  homepage: null | string;
-  size: number;
-  stargazers_count: number;
-  watchers_count: number;
-  language: string;
-  has_issues: boolean;
-  has_projects: boolean;
-  has_downloads: boolean;
-  has_wiki: boolean;
-  has_pages: boolean;
-  has_discussions: boolean;
-  forks_count: number;
-  mirror_url: null;
-  archived: boolean;
-  disabled: boolean;
-  open_issues_count: number;
-  license: License | null;
-  allow_forking: boolean;
-  is_template: boolean;
-  web_commit_signoff_required: boolean;
-  topics: any[];
-  visibility: string;
-  forks: number;
-  open_issues: number;
-  watchers: number;
-  default_branch: string;
-  permissions: Permissions;
+  created_at?: string | null | undefined;
+  updated_at?: string | null | undefined;
+  pushed_at?: string | null | undefined;
+  git_url?: string;
+  ssh_url?: string;
+  clone_url?: string;
+  svn_url?: string;
+  homepage?: null | string;
+  size?: number;
+  stargazers_count?: number;
+  watchers_count?: number;
+  language?: string | null;
+  has_issues?: boolean;
+  has_projects?: boolean;
+  has_downloads?: boolean;
+  has_wiki?: boolean;
+  has_pages?: boolean;
+  has_discussions?: boolean;
+  forks_count?: number;
+  mirror_url?: string | null;
+  archived?: boolean;
+  disabled?: boolean;
+  open_issues_count?: number;
+  license?: License | null;
+  allow_forking?: boolean;
+  is_template?: boolean;
+  web_commit_signoff_required?: boolean;
+  topics?: any[];
+  visibility?: string;
+  forks?: number;
+  open_issues?: number;
+  watchers?: number;
+  default_branch?: string;
+  permissions?: Permissions;
 }
 
 interface License {
-  key: string;
-  name: string;
-  spdx_id: string;
-  url: string;
-  node_id: string;
+  key?: string;
+  name?: string;
+  spdx_id?: string;
+  url?: string;
+  node_id?: string;
 }
 
 interface Owner {
+  name?: string | null | undefined;
+  email?: string | null | undefined;
   login: string;
   id: number;
   node_id: string;
@@ -108,12 +110,13 @@ interface Owner {
   received_events_url: string;
   type: string;
   site_admin: boolean;
+  starred_at?: string | undefined;
 }
 
 interface Permissions {
-  admin: boolean;
-  maintain: boolean;
-  push: boolean;
-  triage: boolean;
-  pull: boolean;
+  admin?: boolean;
+  maintain?: boolean;
+  push?: boolean;
+  triage?: boolean;
+  pull?: boolean;
 }
