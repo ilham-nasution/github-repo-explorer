@@ -13,15 +13,12 @@
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
 * npm
   ```sh
   npm install npm@latest -g
   ```
 
 ### Installation
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
 1. Get a free API Key at [github docs](https://docs.github.com/en/rest?apiVersion=2022-11-28)
 2. Clone the repo
