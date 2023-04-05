@@ -15,9 +15,11 @@ function App() {
   const [repos, setRepos] = useState<RepoInterface[]>([]);
   const [loadingUsers, setLoadingUsers] = useState(false);
   const [loadingRepos, setLoadingRepos] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleInputChange = (e: React.FormEvent<HTMLInputElement>): void => {
     setUsers([]);
+    setErrorMsg("");
     setQuery(e.currentTarget.value);
   };
 
@@ -26,16 +28,21 @@ function App() {
     setLoadingUsers(true);
     setUsers([]);
 
-    const result = await octokit.request("GET /search/users", {
-      headers: {
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
-      q: query,
-      per_page: 5,
-    });
+    try {
+      const result = await octokit.request("GET /search/users", {
+        headers: {
+          "X-GitHub-Api-Version": "2022-11-28",
+        },
+        q: query,
+        per_page: 5,
+      });
 
-    setUsers(result.data.items);
-    setLoadingUsers(false);
+      setUsers(result.data.items);
+      setLoadingUsers(false);
+    } catch (err) {
+      setErrorMsg("Please specify search criteria or enter a valid keyword");
+      setLoadingUsers(false);
+    }
   };
 
   const getRepo = async (username: string) => {
@@ -67,6 +74,26 @@ function App() {
 
   return (
     <div className="container mx-auto p-4">
+      {errorMsg && (
+        <div className="alert alert-error shadow-lg">
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="stroke-current flex-shrink-0 h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span>{errorMsg}</span>
+          </div>
+        </div>
+      )}
       <form onSubmit={handleSubmit}>
         <div className="form-control w-full">
           <label className="label">
