@@ -10,6 +10,6 @@ export default defineConfig({
     },
   },
   define: {
-    global: {},
+    global: "({})",
   },
 });
